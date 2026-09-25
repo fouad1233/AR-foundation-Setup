@@ -112,3 +112,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# XR Simulation sample environments (re-importable from ContentPackages/*.tgz)
+/[Aa]ssets/UnityXRContent/
+/[Aa]ssets/UnityXRContent.meta
