@@ -117,3 +117,7 @@ InitTestScene*.unity*
 /[Aa]ssets/UnityXRContent/
 /[Aa]ssets/UnityXRContent.meta
 ContentPackages/
+Library/
+Temp/
+obj/
+bin/
