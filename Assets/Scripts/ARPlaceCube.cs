@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -30,6 +32,15 @@ public class ARPlaceCube : MonoBehaviour
     // True while in the cooldown after a placement; blocks new placements.
     private bool isPlacing;
 
+    private void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+    }
+
+    private void OnDisable()
+    {
+        EnhancedTouchSupport.Disable();
+    }
     void Awake()
     {
         // If the field was not assigned in the Inspector, look for the manager
@@ -45,28 +56,42 @@ public class ARPlaceCube : MonoBehaviour
     {
         // No raycast manager means we cannot hit-test the AR world at all.
         if (!raycastManager) return;
+        // if we are placing an object, we don't want to place another one
+        if (isPlacing) return;
 
         // A "press" is either the first frame of a touch (device) or a left mouse click (Editor).
-        bool pressed = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) ||
-                       Input.GetMouseButtonDown(0);
-
-        if (pressed && !isPlacing)
+        bool pressed = false;
+        Vector2 screenPosition = Vector2.zero;
+        
+        if (Touchscreen.current!=null)
         {
-            isPlacing = true;
-
-            // Use the touch position on device, otherwise fall back to the mouse position.
-            if (Input.touchCount > 0)
+            // On a device, check for a new touch in the current frame.
+            var primary = Touchscreen.current.primaryTouch;
+            if (primary != null && primary.press.wasPressedThisFrame)
             {
-                PlaceObject(Input.GetTouch(0).position);
+                pressed = true;
+                screenPosition = primary.position.ReadValue();
             }
-            else
-            {
-                PlaceObject(Input.mousePosition);
-            }
-
-            // Re-enable placing after a short delay.
-            StartCoroutine(SetIsPlacingToFalseWithDelay());
+            //PlaceObject(Input.GetTouch(0).position);
         }
+        else if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            // In the Editor, check for a left mouse click in the current frame.
+
+            pressed = true;
+            screenPosition = Mouse.current.position.ReadValue();
+        
+        }
+        if (pressed )
+        {
+            
+            isPlacing = true;
+            PlaceObject(screenPosition);
+        }
+
+
+        // Re-enable placing after a short delay.
+        StartCoroutine(SetIsPlacingToFalseWithDelay());
     }
 
     /// <summary>
