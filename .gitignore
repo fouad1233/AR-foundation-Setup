@@ -116,3 +116,4 @@ InitTestScene*.unity*
 # XR Simulation sample environments (re-importable from ContentPackages/*.tgz)
 /[Aa]ssets/UnityXRContent/
 /[Aa]ssets/UnityXRContent.meta
+ContentPackages/
