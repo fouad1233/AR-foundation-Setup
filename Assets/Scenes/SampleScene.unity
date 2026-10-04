@@ -119,6 +119,68 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &256968210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256968212}
+  - component: {fileID: 256968211}
+  m_Layer: 0
+  m_Name: LipstickApp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &256968211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256968210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69afa020271f69a28d4e031249647bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LipstickAR.LipstickScanner
+  cameraManager: {fileID: 1511654452}
+  raycastManager: {fileID: 1009511068}
+  arCamera: {fileID: 1511654454}
+  characterPrefab: {fileID: 547086980820166886, guid: 921054deed45bf93d90c88e0b7a0835e, type: 3}
+  characterScale: 0.3
+  spawnDistance: 0.9
+  lipsticks:
+  - name: Dior
+    referenceColor: {r: 0.68235296, g: 0.41568628, b: 0.42745098, a: 1}
+    lipColor: {r: 0.8392157, g: 0.3372549, b: 0.36078432, a: 1}
+  - name: YSL
+    referenceColor: {r: 0.90588236, g: 0.6156863, b: 0.67058825, a: 1}
+    lipColor: {r: 0.9254902, g: 0.36078432, b: 0.54901963, a: 1}
+  sampleSize: 0.18
+  minLipstickFraction: 0.3
+  sampleInterval: 0.15
+  framesToConfirm: 6
+  cooldown: 4
+--- !u!4 &256968212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256968210}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +370,7 @@ GameObject:
   - component: {fileID: 1009511069}
   - component: {fileID: 1009511068}
   - component: {fileID: 1009511070}
+  - component: {fileID: 1009511071}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -331,7 +394,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 1009511065}
   m_CameraFloorOffsetObject: {fileID: 1819439734}
   m_RequestedTrackingOriginMode: 0
-  m_CameraYOffset: 1.1176
+  m_CameraYOffset: 0
 --- !u!4 &1009511067
 Transform:
   m_ObjectHideFlags: 0
@@ -355,7 +418,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009511065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
@@ -371,7 +434,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009511065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
@@ -388,13 +451,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009511065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a35be7c64d8d84630ab9f2f49cbf7bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ARPlaceCube
   raycastManager: {fileID: 1009511068}
   placementPrefab: {fileID: 3995174753682408203, guid: 484677c5fcc7a4b2ba1a309844e23093, type: 3}
+--- !u!114 &1009511071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009511065}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARTrackedImageManager
+  <trackablesChanged>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SerializedLibrary: {fileID: 11400000, guid: 9064ee1f81b1e4564845bf6216acf7c1, type: 2}
+  m_MaxNumberOfMovingImages: 1
+  m_TrackedImagePrefab: {fileID: 3995174753682408203, guid: 484677c5fcc7a4b2ba1a309844e23093, type: 3}
 --- !u!1 &1106123435
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,3 +810,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1009511067}
   - {fileID: 1106123438}
+  - {fileID: 256968212}
